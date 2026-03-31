@@ -11,8 +11,8 @@ int brightnessLevel = 0; // 0, 1, 2, 3, 4
 int pwmValues[5] = {0, 64, 127, 191, 255}; // brightness value
 
 // Debounce variable
-int upState, lastUpState = LOW;
-int downState, lastDownState = LOW;
+int upState, lastUpState = HIGH;
+int downState, lastDownState = HIGH;
 unsigned long lastUpTime = 0, lastDownTime = 0;
 const unsigned long debounceDelay = 50;
 
@@ -22,8 +22,8 @@ void setup() {
   pinMode(pinE, OUTPUT);
   pinMode(pinDP, OUTPUT);
   
-  pinMode(upButtonPin, INPUT);
-  pinMode(downButtonPin, INPUT);
+  pinMode(upButtonPin, INPUT_PULLUP);
+  pinMode(downButtonPin, INPUT_PULLUP);
 
   updateBrightness();// initial brightness 
 }
@@ -37,7 +37,7 @@ void loop() {
   if ((millis() - lastUpTime) > debounceDelay) {
     if (upReading != upState) {
       upState = upReading;
-      if (upState == HIGH) { // if upButtonPin is 0 or 1 if press need to be consider
+      if (upState == LOW) { // if upButtonPin is 0 or 1 if press need to be consider
         if (brightnessLevel < 4) {
           brightnessLevel++;
           updateBrightness();
@@ -52,7 +52,7 @@ void loop() {
   if ((millis() - lastDownTime) > debounceDelay) {
     if (downReading != downState) {
       downState = downReading;
-      if (downState == HIGH) { // if upButtonPin is 0 or 1 if press need to be consider
+      if (downState == LOW) { // if upButtonPin is 0 or 1 if press need to be consider
         if (brightnessLevel > 0) {
           brightnessLevel--;
           updateBrightness();
