@@ -20,8 +20,8 @@ byte digits[10][7] = {
   {0,0,0,0,1,0,0}  // 9
 };
 
-int upState, lastUpState = LOW;
-int downState, lastDownState = LOW;
+int upState, lastUpState = HIGH;
+int downState, lastDownState = HIGH;
 unsigned long lastUpTime = 0, lastDownTime = 0;
 unsigned long debounceDelay = 50;
 
@@ -29,8 +29,8 @@ void setup() {
   for (int i = 0; i < 7; i++) {
     pinMode(segPins[i], OUTPUT);
   }
-  pinMode(upButtonPin, INPUT);
-  pinMode(downButtonPin, INPUT);
+  pinMode(upButtonPin, INPUT_PULLUP);
+  pinMode(downButtonPin, INPUT_PULLUP);
   displayDigit(count); // initial 7-seg as 0
 }
 
@@ -43,7 +43,7 @@ void loop() {
   if ((millis() - lastUpTime) > debounceDelay) {
     if (upReading != upState) {
       upState = upReading;
-      if (upState == HIGH) { // if upButtonPin is 0 or 1 if press need to be consider
+      if (upState == LOW) { // if upButtonPin is 0 or 1 if press need to be consider
         count++;
         if (count > 9) count = 0;
         displayDigit(count);
@@ -57,7 +57,7 @@ void loop() {
   if ((millis() - lastDownTime) > debounceDelay) {
     if (downReading != downState) {
       downState = downReading;
-      if (downState == HIGH) { // if downButtonPin is 0 or 1 if press need to be consider
+      if (downState == LOW) { // if downButtonPin is 0 or 1 if press need to be consider
         count--;
         if (count < 0) count = 9;
         displayDigit(count);
