@@ -1,5 +1,5 @@
 const int segA = 13; // Pin A connect 13
-const int segD = 12; // Pin D connect 12
+const int segD = 10; // Pin D connect 12
 int segState1 = LOW;
 int segState2 = LOW;
 unsigned long previousMillis1 = 0; 
