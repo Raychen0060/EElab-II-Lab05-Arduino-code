@@ -56,7 +56,7 @@ void loop() {
 
   if (currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
-    ledState = ~ledState;
+    ledState = !ledState;
     digitalWrite(ledPin, ledState);
   }
 }
