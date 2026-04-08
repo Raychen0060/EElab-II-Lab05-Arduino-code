@@ -60,7 +60,6 @@ void loop() {
       if (downState == LOW) { // if downButtonPin is 0 or 1 if press need to be consider
         count--;
         if (count < 0) count = 20;
-        
       }
     }
   }
