@@ -28,6 +28,8 @@ unsigned long debounceDelay = 50;
 int count = 0;
 void setup() {
   for (int i = 0; i < 7; i++) pinMode(segPins[i], OUTPUT);
+  pinMode(digitPins[0], OUTPUT); 
+  pinMode(digitPins[1], OUTPUT);
   pinMode(upButtonPin, INPUT_PULLUP);
   pinMode(downButtonPin, INPUT_PULLUP);
   displayMultiplex(count); // initial 7-seg as 0
@@ -58,6 +60,7 @@ void loop() {
       if (downState == LOW) { // if downButtonPin is 0 or 1 if press need to be consider
         count--;
         if (count < 0) count = 20;
+        
       }
     }
   }
