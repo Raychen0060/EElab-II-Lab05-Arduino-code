@@ -1,9 +1,5 @@
 // Pin Order： A, B, C, D, E, F, G
 const int segPins[7] = {13,12,11,10,9,8,7};
-
-const int upButtonPin = 2; // connect to pin 2
-const int downButtonPin = 3; // connect to pin 3
-
 bool down = 0; 
 
 unsigned long previousMillis = 0;
